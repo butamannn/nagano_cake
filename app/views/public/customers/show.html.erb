@@ -1,0 +1,37 @@
+<h1>マイページ</h1>
+<div class="row">
+  <div class="col-10">
+    <table class="table table-striped table-bordered bg-light">
+      <tbody>
+        <tr>
+          <th width="20%">氏名</th>
+          <td><%= @user.first_name %> <%= @user.last_name %></td>
+        </tr>
+        <tr>
+          <th>カナ</th>
+          <td><%= @user.kana_first_name %> <%= @user.kana_last_name %></td>
+        </tr>
+        <tr>
+          <th>郵便番号</th>
+          <td><%= @user.postal_code %></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td><%= @user.address %></td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <td><%= @user.telephone_number %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @user.email %></td>
+        </tr>
+      </tbody>
+    </table>
+    <%= link_to "プロフィールを編集する", edit_customer_path(@user), class: "btn btn-primary mb-4" %><br>
+    <div class="border-top border-dark mb-3"></div>
+      <%= link_to "▷  配送先一覧を確認",  addresses_path, class: "text-secondary" %><br>
+      <%= link_to "▷  注文履歴を確認", orders_path, class: "text-secondary" %>
+  </div>
+</div>

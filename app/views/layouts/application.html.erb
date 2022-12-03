@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NaganoCake</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+      <%= link_to "NaganoCake", root_path, class: "navbar-brand" %>
+
+      <ul class="navbar-nav nav justify-content-end mr-sm-2">
+        <% if customer_signed_in? %>
+        <li class="nav-item">
+            <%= link_to "マイページ", public_customers_my_page_path, class: "nav-link fas fa-user" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "カート一覧", public_cart_items_index_path, class: "nav-link fas fa-shopping-cart" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link fas fa-sign-out-alt" %>
+          </li>
+        <% elsif admin_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "商品一覧", admin_items_index_path, class: "nav-link fas fa-cookie" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "受注一覧", admin_homes_top_path, class: "nav-link fas fas-folder-open" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "商品登録", admin_items_new_path, class: "nav-link fas" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link fas fa-sign-out-alt" %>
+          </li>
+          <div id="nav-search">
+            <%= form_tag root_path, :method => 'get' do %>
+              <p>
+                <%= text_field_tag :search, params[:search] %>
+                <%= submit_tag "検索", :name => nil %>
+              </p>
+            <% end %>
+          </div>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "ログイン", new_customer_session_path, class: "nav-link fas fa-sign-in-alt" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "新規登録", new_customer_registration_path, class: "nav-link fas fa-user-plus" %>
+          </li>
+        <% end %>
+      </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="body">
+    <div class="container">
+    <%= yield %>
+    </div>
+  </div>
+  </body>
+</html>

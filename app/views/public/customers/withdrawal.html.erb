@@ -1,0 +1,4 @@
+<div class="mt-4">本当に退会しますか？</div>
+
+<%= button_to '退会しない', customer_path, method: :get %>
+<%= button_to '退会する', customer_path(current_customer), method: :delete, confirm: "よろしいですか？" %>

@@ -1,0 +1,48 @@
+<% if admin_signed_in? %>
+
+  <% if params[:search] %>
+    <h1>検索結果</h1>
+    <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-xs-3">
+        <div class="card mb-3">
+
+          <%= attachment_image_tag item, :image, format: 'jpeg', class: "bd-placeholder-img card-img-top", fallback: "ithigo.jpg", height: "180" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= item.name %></h5>
+            <p class="card-text"><%= item.non_taxed_price %>円</p>
+            <%= link_to "この商品を見る", item_path(item.id), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% else %>
+    <h1>管理者画面</h1>
+    本日の注文件数 : <%= @num %> 件
+    <% end %>
+<% else %>
+
+  <div class="jumbotron jumbotron-fluid main-img">
+    <div class="container">
+      <h1 class="mb-5" style="text-height:100%; position: absolute; bottom:20%; right: 10%; color:#444; font-family:monospace;">自分にも、甘くいこう。</h1>
+    </div>
+  </div>
+  <h1 class="text-center" style="letter-spacing:0.15em;">商品一覧</h1>
+  <div class="border mb-4 mx-auto" style="width:10%"></div>
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card mb-3">
+          <%= attachment_image_tag item, :image, format: 'jpeg', class: "bd-placeholder-img card-img-top", fallback: "ithigo.jpg", height: "180" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= item.name %></h5>
+            <p class="card-text"><%= item.non_taxed_price %>円</p>
+            <%= link_to "この商品を見る", item_path(item.id), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
